@@ -1,16 +1,21 @@
 import { BiSolidCameraMovie } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import { movieContext } from "../context/Context";
+import { useContext } from "react";
 
 function NavBar() {
+  const { movieActions } = useContext(movieContext);
   const navigate = useNavigate();
+
+  const handleClick = () => {
+    movieActions({ type: "remove" });
+    navigate("/");
+  };
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <a
-          onClick={() => navigate("/")}
-          className="navbar-brand fw-bold"
-          href="#"
-        >
+        <a onClick={handleClick} className="navbar-brand fw-bold" href="#">
           Movies <BiSolidCameraMovie />
         </a>
         <button

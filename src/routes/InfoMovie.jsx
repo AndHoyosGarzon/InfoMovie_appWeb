@@ -1,52 +1,72 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import style from "../styles/style.module.css";
 import { AiTwotoneLike } from "react-icons/ai";
 import { FaLanguage } from "react-icons/fa";
+import { movieContext } from "../context/Context";
+import { useContext, useEffect, useState } from "react";
 
 function InfoMovie() {
-  const {
-    id,
-    original_language,
-    original_title,
-    overview,
-    backdrop_path,
-    poster_path,
-    vote_count,
-  } = useParams();
+  const navigate = useNavigate();
+  const { movie, movieActions } = useContext(movieContext);
+  const [movieData, setMovieData] = useState([]);
 
-  console.log(poster_path);
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (movie) {
+      setMovieData(movie[0]);
+    }
+  }, [id]);
+
+  const handleDeleteContext = () => {
+    setMovieData([]);
+    movieActions({ type: "remove" });
+    navigate("/");
+  };
 
   return (
     <>
       <NavBar />
-      <div className={style.container_info}>
-        <div className={style.content_image}>
-          <img
-            className={style.image}
-            src={
-              poster_path && `https://image.tmdb.org/t/p/w500/${poster_path}`
-            }
-            alt={original_title && original_title}
-          />
-        </div>
-        <div className={style.content_text}>
-          <div>
-            <h1 className="text-center fw-bold">
-              {original_title && original_title}
-            </h1>
-            <p className="mt-5">{overview && overview}</p>
+      {movieData && (
+        <div className={style.container_info}>
+          <div className={style.content_image}>
+            <img
+              className={style.image}
+              src={
+                movieData.poster &&
+                `https://image.tmdb.org/t/p/w500/${movieData.poster}`
+              }
+              alt={movieData.title && movieData.title}
+            />
           </div>
-          <div className={style.content_data}>
-            <h5>
-              <FaLanguage size={30} /> {original_language && original_language}
-            </h5>
-            <h5>
-              <AiTwotoneLike /> {vote_count && vote_count}
-            </h5>
+          <div className={style.content_text}>
+            <div>
+              <h1 className="text-center fw-bold">
+                {movieData.title && movieData.title}
+              </h1>
+              <p className="mt-5">{movieData.overview && movieData.overview}</p>
+            </div>
+            <div className={style.content_data}>
+              <h5>
+                <FaLanguage size={30} />{" "}
+                {movieData.language && movieData.language}
+              </h5>
+              <h5>
+                <AiTwotoneLike /> {movieData.vote && movieData.vote}
+              </h5>
+            </div>
+            <div className="container d-flex justify-content-center mb-5">
+              <button
+                onClick={() => handleDeleteContext()}
+                className="btn btn-sm fw-bold btn-primary"
+              >
+                Go to Home
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

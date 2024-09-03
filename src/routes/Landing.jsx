@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import CardMovie from "../components/CardMovie";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
+import { movieContext } from "../context/Context";
 
 function Landing() {
   const [movies, setMovies] = useState([]);
-  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const { movieActions } = useContext(movieContext);
 
   useEffect(() => {
     async function getMovies() {
@@ -35,6 +37,25 @@ function Landing() {
     getMovies();
   }, []);
 
+  const handleNavigateContext = (
+    id,
+    language,
+    title,
+    overview,
+    vote,
+    backdrop,
+    poster
+  ) => {
+    if (movies.length < 1) {
+      console.log("nada para el contexto");
+    }
+
+    const addMovie = { id, language, title, overview, vote, backdrop, poster };
+    movieActions({ type: "add", payload: addMovie });
+
+    navigate(`/info-movie/${id}`);
+  };
+
   if (error) {
     return (
       <div className="container-fluid text-center mt-5">
@@ -58,8 +79,14 @@ function Landing() {
               title={movie.original_title}
               date={movie.release_date}
               params={() =>
-                navigate(
-                  `/info-movie/${movie.id}/${movie.original_language}/${movie.original_title}/${movie.overview}/${movie.vote_count}${movie.backdrop_path}${movie.poster_path}`
+                handleNavigateContext(
+                  movie.id,
+                  movie.original_language,
+                  movie.original_title,
+                  movie.overview,
+                  movie.vote_count,
+                  movie.backdrop_path,
+                  movie.poster_path
                 )
               }
             />

@@ -7,10 +7,7 @@ function Home() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route
-          path="/info-movie/:id/:original_language/:original_title/:overview/:vote_count/:backdrop_path/:poster_path"
-          element={<InfoMovie />}
-        />
+        <Route path="/info-movie/:id" element={<InfoMovie />} />
       </Routes>
     </BrowserRouter>
   );
