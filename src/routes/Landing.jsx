@@ -53,6 +53,8 @@ function Landing() {
     const addMovie = { id, language, title, overview, vote, backdrop, poster };
     movieActions({ type: "add", payload: addMovie });
 
+    const strObj = JSON.stringify(addMovie);
+    sessionStorage.setItem("movie", strObj);
     navigate(`/info-movie/${id}`);
   };
 

@@ -15,14 +15,19 @@ function InfoMovie() {
 
   useEffect(() => {
     if (movie) {
-      setMovieData(movie[0]);
+      const dataMovie = sessionStorage.getItem("movie");
+      const objMovie = JSON.parse(dataMovie);
+      return setMovieData(objMovie);
     }
   }, [id]);
 
+  console.log(movieData);
+
   const handleDeleteContext = () => {
-    setMovieData([]);
+    // setMovieData([]);
     movieActions({ type: "remove" });
     navigate("/");
+    sessionStorage.clear();
   };
 
   return (
