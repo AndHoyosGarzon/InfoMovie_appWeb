@@ -1,10 +1,16 @@
 import { BiSolidCameraMovie } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
+  const navigate = useNavigate();
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <a className="navbar-brand fw-bold" href="#">
+        <a
+          onClick={() => navigate("/")}
+          className="navbar-brand fw-bold"
+          href="#"
+        >
           Movies <BiSolidCameraMovie />
         </a>
         <button
