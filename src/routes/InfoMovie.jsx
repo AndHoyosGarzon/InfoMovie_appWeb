@@ -9,7 +9,7 @@ import { useContext, useEffect, useState } from "react";
 function InfoMovie() {
   const navigate = useNavigate();
   const { movie, movieActions } = useContext(movieContext);
-  const [movieData, setMovieData] = useState([]);
+
 
   const { id } = useParams();
 
@@ -47,7 +47,7 @@ function InfoMovie() {
             </div>
             <div className={style.content_data}>
               <h5>
-                <FaLanguage size={30} />{" "}
+                <FaLanguage size={30} />
                 {objMovie.language && objMovie.language}
               </h5>
               <h5>

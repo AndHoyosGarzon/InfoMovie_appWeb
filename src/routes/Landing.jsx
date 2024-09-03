@@ -55,7 +55,7 @@ function Landing() {
 
     const strObj = JSON.stringify(addMovie);
     sessionStorage.setItem("movie", strObj);
-    navigate(`/info-movie/${id}`);
+    navigate(`/info-movie`);
   };
 
   if (error) {
