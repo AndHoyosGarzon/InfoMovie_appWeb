@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import style from '../styles/style.module.css'
+import style from "../styles/style.module.css";
+import { AiTwotoneLike } from "react-icons/ai";
+import { FaLanguage } from "react-icons/fa";
 
 function InfoMovie() {
   const {
@@ -18,43 +20,27 @@ function InfoMovie() {
   return (
     <>
       <NavBar />
-      <div
-        style={{
-          backgroundImage: `url('https://image.tmdb.org/t/p/w500/${backdrop_path}')`,
-          width: "auto",
-          height: "50rem",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: "7.9%",
-            left: "0",
-            width: "100%",
-            height: "50rem",
-            backgroundColor: "rgba(0, 0, 0, 0.97)",
-          }}
-        >
-          <div className={style.container_info}>
-            <div className={style.content_image}>
-              <img
-                src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-                alt={original_title}
-              />
-            </div>
-            <div className={style.content_data}>
-              <h2 className="fw-bolder mb-4">{original_title}</h2>
-              <p className="text-secondary">{overview}</p>
-            </div>
-            <div>
-              <h2 className="fw-bolder mb-4">Idioma: {original_language}</h2>
-              <p className="text-secondary ">Votos: {vote_count}</p>
-            </div>
+      <div className={style.container_info}>
+        <div className={style.content_image}>
+          <img
+            className={style.image}
+            src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+            alt={original_title}
+          />
+        </div>
+        <div className={style.content_text}>
+          <div>
+            <h1 className="text-center fw-bold">{original_title}</h1>
+            <p className="mt-5">{overview}</p>
           </div>
-
-
+          <div className={style.content_data}>
+            <h5>
+              <FaLanguage size={30} /> {original_language}
+            </h5>
+            <h5>
+              <AiTwotoneLike /> {vote_count}
+            </h5>
+          </div>
         </div>
       </div>
     </>
