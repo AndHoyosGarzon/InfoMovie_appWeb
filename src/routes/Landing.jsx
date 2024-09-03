@@ -10,8 +10,6 @@ function Landing() {
 
   useEffect(() => {
     async function getMovies() {
-      const url3 = "https://api.themoviedb.org/3/trending/all/day?language=en-US'"
-      const url2 = "https://api.themoviedb.org/3/trending/movie/week?language=en-US"
       const url =
         "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
       const options = {
@@ -23,7 +21,7 @@ function Landing() {
         },
       };
       try {
-        const response = await fetch(url2, options);
+        const response = await fetch(url, options);
         if (!response.ok) {
           throw new Error({ msg: `${response.statusText}` });
         }
@@ -37,7 +35,15 @@ function Landing() {
     getMovies();
   }, []);
 
-  movies ? console.log(movies) : console.log("Aun no hay movies");
+  if (error) {
+    return (
+      <div className="container-fluid text-center mt-5">
+        <h1 className="bg-danger p-3 rounded border">
+          Error al cargar los datos
+        </h1>
+      </div>
+    );
+  }
 
   return (
     <>

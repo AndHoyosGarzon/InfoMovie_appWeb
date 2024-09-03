@@ -2,7 +2,7 @@ import { MdLocalMovies } from "react-icons/md";
 
 function CardMovie({ img, title, date, votes, params }) {
   return (
-    <div className="card m-3" style={{ width: "18rem" }}>
+    <div className="card m-3 col-sm-4 col-md-3 col-lg-2" >
       <span className="position-absolute top-0 start-100 border secondary-subtle translate-middle badge rounded-pill bg-danger">
         {votes}%
       </span>
