@@ -24,21 +24,25 @@ function InfoMovie() {
         <div className={style.content_image}>
           <img
             className={style.image}
-            src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-            alt={original_title}
+            src={
+              poster_path && `https://image.tmdb.org/t/p/w500/${poster_path}`
+            }
+            alt={original_title && original_title}
           />
         </div>
         <div className={style.content_text}>
           <div>
-            <h1 className="text-center fw-bold">{original_title}</h1>
-            <p className="mt-5">{overview}</p>
+            <h1 className="text-center fw-bold">
+              {original_title && original_title}
+            </h1>
+            <p className="mt-5">{overview && overview}</p>
           </div>
           <div className={style.content_data}>
             <h5>
-              <FaLanguage size={30} /> {original_language}
+              <FaLanguage size={30} /> {original_language && original_language}
             </h5>
             <h5>
-              <AiTwotoneLike /> {vote_count}
+              <AiTwotoneLike /> {vote_count && vote_count}
             </h5>
           </div>
         </div>
