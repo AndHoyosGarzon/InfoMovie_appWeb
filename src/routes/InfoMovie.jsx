@@ -13,15 +13,8 @@ function InfoMovie() {
 
   const { id } = useParams();
 
-  useEffect(() => {
-    if (movie) {
-      const dataMovie = sessionStorage.getItem("movie");
-      const objMovie = JSON.parse(dataMovie);
-      return setMovieData(objMovie);
-    }
-  }, [id]);
-
-  console.log(movieData);
+  const dataMovie = sessionStorage.getItem("movie");
+  const objMovie = JSON.parse(dataMovie);
 
   const handleDeleteContext = () => {
     // setMovieData([]);
@@ -33,32 +26,32 @@ function InfoMovie() {
   return (
     <>
       <NavBar />
-      {movieData && (
+      {objMovie && (
         <div className={style.container_info}>
           <div className={style.content_image}>
             <img
               className={style.image}
               src={
-                movieData.poster &&
-                `https://image.tmdb.org/t/p/w500/${movieData.poster}`
+                objMovie.poster &&
+                `https://image.tmdb.org/t/p/w500/${objMovie.poster}`
               }
-              alt={movieData.title && movieData.title}
+              alt={objMovie.title && objMovie.title}
             />
           </div>
           <div className={style.content_text}>
             <div>
               <h1 className="text-center fw-bold">
-                {movieData.title && movieData.title}
+                {objMovie.title && objMovie.title}
               </h1>
-              <p className="mt-5">{movieData.overview && movieData.overview}</p>
+              <p className="mt-5">{objMovie.overview && objMovie.overview}</p>
             </div>
             <div className={style.content_data}>
               <h5>
                 <FaLanguage size={30} />{" "}
-                {movieData.language && movieData.language}
+                {objMovie.language && objMovie.language}
               </h5>
               <h5>
-                <AiTwotoneLike /> {movieData.vote && movieData.vote}
+                <AiTwotoneLike /> {objMovie.vote && objMovie.vote}
               </h5>
             </div>
             <div className="container d-flex justify-content-center mb-5">
