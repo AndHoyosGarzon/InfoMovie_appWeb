@@ -8,50 +8,82 @@ import { useContext, useEffect, useState } from "react";
 
 function InfoMovie() {
   const navigate = useNavigate();
-  const { movie, movieActions } = useContext(movieContext);
+  const { movieActions } = useContext(movieContext);
+  const { title } = useParams();
+  const [movie, setMovie] = useState([]);
+  const [error, setError] = useState("");
 
-
-  const { id } = useParams();
-
-  const dataMovie = sessionStorage.getItem("movie");
-  const objMovie = JSON.parse(dataMovie);
+  useEffect(() => {
+    if (title) {
+      const getMovie = async () => {
+        const url = `https://api.themoviedb.org/3/search/movie?query=${title}&include_adult=false&language=en-US&page=1`;
+        const options = {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMTg0YWYzYWZmMjRjZmJlMDRlMDE3OTNkYWNmN2E4MSIsIm5iZiI6MTcyNTMxODY5MS44ODI0NTQsInN1YiI6IjY2Nzc3ZjA4MmUyNGViMDI4OWFhNTAyOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Nga-9PotsNbiqsDF-LIUoCT36-sgBidR1W7MQSoctnw",
+          },
+        };
+        try {
+          const response = await fetch(url, options);
+          if (!response.ok) {
+            throw new Error({ msg: `${response.statusText}` });
+          }
+          const data = await response.json();
+          return setMovie(data.results[0]);
+        } catch (error) {
+          return setError(error.message);
+        }
+      };
+      getMovie();
+    }
+  }, [title]);
 
   const handleDeleteContext = () => {
-    // setMovieData([]);
     movieActions({ type: "remove" });
     navigate("/");
-    sessionStorage.clear();
   };
+
+  if (error) {
+    return (
+      <div className="container text-center ">
+        <h1 className="bg-danger p-5 text-white fw-bold">{error}</h1>
+      </div>
+    );
+  } else {
+    console.log(movie);
+  }
 
   return (
     <>
       <NavBar />
-      {objMovie && (
+      {movie ? (
         <div className={style.container_info}>
           <div className={style.content_image}>
             <img
               className={style.image}
               src={
-                objMovie.poster &&
-                `https://image.tmdb.org/t/p/w500/${objMovie.poster}`
+                movie.poster_path &&
+                `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
               }
-              alt={objMovie.title && objMovie.title}
+              alt={movie.original_title && movie.original_title}
             />
           </div>
           <div className={style.content_text}>
             <div>
               <h1 className="text-center fw-bold">
-                {objMovie.title && objMovie.title}
+                {movie.original_title && movie.original_title}
               </h1>
-              <p className="mt-5">{objMovie.overview && objMovie.overview}</p>
+              <p className="mt-5">{movie.overview && movie.overview}</p>
             </div>
             <div className={style.content_data}>
               <h5>
                 <FaLanguage size={30} />
-                {objMovie.language && objMovie.language}
+                {movie.original_language && movie.original_language}
               </h5>
               <h5>
-                <AiTwotoneLike /> {objMovie.vote && objMovie.vote}
+                <AiTwotoneLike /> {movie.vote_count && movie.vote_count}
               </h5>
             </div>
             <div className="container d-flex justify-content-center mb-5">
@@ -63,6 +95,10 @@ function InfoMovie() {
               </button>
             </div>
           </div>
+        </div>
+      ) : (
+        <div className="container text-center fw-bold">
+          <h1>Loading Movie...</h1>
         </div>
       )}
     </>

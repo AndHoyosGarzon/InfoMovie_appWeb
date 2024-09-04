@@ -46,16 +46,10 @@ function Landing() {
     backdrop,
     poster
   ) => {
-    if (movies.length < 1) {
-      console.log("nada para el contexto");
-    }
-
     const addMovie = { id, language, title, overview, vote, backdrop, poster };
     movieActions({ type: "add", payload: addMovie });
 
-    const strObj = JSON.stringify(addMovie);
-    sessionStorage.setItem("movie", strObj);
-    navigate(`/info-movie`);
+    navigate(`/info-movie/${title}`);
   };
 
   if (error) {
@@ -72,7 +66,7 @@ function Landing() {
     <>
       <NavBar />
       <div className="container my-5 d-flex justify-content-evenly flex-wrap">
-        {movies &&
+        {movies ? (
           movies.map((movie) => (
             <CardMovie
               key={movie.id}
@@ -92,7 +86,12 @@ function Landing() {
                 )
               }
             />
-          ))}
+          ))
+        ) : (
+          <div className="container text-center fw-bold">
+            <h1>Loading Movies...</h1>{" "}
+          </div>
+        )}
       </div>
     </>
   );

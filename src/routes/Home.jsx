@@ -7,7 +7,7 @@ function Home() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/info-movie" element={<InfoMovie />} />
+        <Route path="/info-movie/:title" element={<InfoMovie />} />
       </Routes>
     </BrowserRouter>
   );
