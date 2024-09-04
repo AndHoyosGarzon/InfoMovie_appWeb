@@ -3,6 +3,7 @@ import Landing from "./Landing";
 import Movies from "./Movies";
 import Series from "./Series";
 import Info from "./Info";
+import Peoples from "./Peoples";
 
 function Home() {
   return (
@@ -10,8 +11,9 @@ function Home() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/movies" element={<Movies />} />
-        <Route path="/info-movie" element={<Info />} />
         <Route path="/series" element={<Series />} />
+        <Route path="/peoples" element={<Peoples />} />
+        <Route path="/info" element={<Info />} />
       </Routes>
     </BrowserRouter>
   );

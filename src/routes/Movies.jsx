@@ -48,8 +48,7 @@ function Movies() {
   ) => {
     const addMovie = { id, language, title, overview, vote, backdrop, poster };
     movieActions({ type: "add", payload: addMovie });
-
-    navigate(`/info-movie`);
+    navigate(`/info`);
   };
 
   if (error) {

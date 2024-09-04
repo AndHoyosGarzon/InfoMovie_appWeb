@@ -12,7 +12,7 @@ function Info() {
 
   const handleDeleteContext = () => {
     movieActions({ type: "remove" });
-    navigate("/movies");
+    navigate("/");
   };
 
   return (
@@ -51,7 +51,7 @@ function Info() {
                 onClick={() => handleDeleteContext()}
                 className="btn btn-sm fw-bold btn-primary"
               >
-                Go Back
+                Go Home
               </button>
             </div>
           </div>

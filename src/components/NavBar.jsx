@@ -54,8 +54,12 @@ function NavBar() {
               </a>
             </li>
             <li className="nav-item me-5">
-              <a className="nav-link" href="#">
-                Gente
+              <a
+                onClick={() => navigate("/peoples")}
+                className="nav-link"
+                href="#"
+              >
+                Peoples
               </a>
             </li>
             <li className="nav-item me-3">
