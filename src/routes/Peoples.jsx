@@ -3,6 +3,10 @@ import Card from "../components/Card";
 import NavBar from "../components/NavBar";
 import { movieContext } from "../context/Context";
 import { useNavigate } from "react-router-dom";
+import { getData } from "../js/fetch";
+import { optionsHeaders, urls } from "../js/tools";
+import Errors_data from "../components/Errors";
+import style from "../styles/style.module.css";
 
 function Peoples() {
   const [peoples, setPeoples] = useState([]);
@@ -11,30 +15,7 @@ function Peoples() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getPeoples = async () => {
-      const url =
-        "https://api.themoviedb.org/3/trending/person/day?language=en-US";
-      const options = {
-        method: "GET",
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMTg0YWYzYWZmMjRjZmJlMDRlMDE3OTNkYWNmN2E4MSIsIm5iZiI6MTcyNTMxODY5MS44ODI0NTQsInN1YiI6IjY2Nzc3ZjA4MmUyNGViMDI4OWFhNTAyOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Nga-9PotsNbiqsDF-LIUoCT36-sgBidR1W7MQSoctnw",
-          "Content-Type": "application/json",
-        },
-      };
-      try {
-        const response = await fetch(url, options);
-        if (!response.ok) {
-          throw new Error({ msg: `${response.statusText}` });
-        }
-        const data = await response.json();
-        return setPeoples(data.results);
-      } catch (error) {
-        return setError(error);
-      }
-    };
-
-    getPeoples();
+    getData(urls.urlPeoples, optionsHeaders, setPeoples, setError);
   }, []);
 
   const handleNavigateContext = (
@@ -51,17 +32,7 @@ function Peoples() {
     navigate(`/info`);
   };
 
-  if (error) {
-    return (
-      <div className="container-fluid text-center mt-5">
-        <h1 className="bg-danger p-3 rounded border">
-          Error al cargar Peoples
-        </h1>
-      </div>
-    );
-  }
-
-  console.log(peoples);
+  if (error) return <Errors_data />;
 
   return (
     <>
@@ -75,6 +46,17 @@ function Peoples() {
               img={`https://image.tmdb.org/t/p/w500${people.profile_path}`}
               title={people.name}
               date={people.known_for_department}
+              params={() =>
+                handleNavigateContext(
+                  people.id,
+                  people.original_language,
+                  people.name,
+                  people.media_type,
+                  people.popularity,
+                  people.known_for_department,
+                  people.profile_path
+                )
+              }
             />
           ))
         ) : (

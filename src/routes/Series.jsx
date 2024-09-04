@@ -3,6 +3,9 @@ import NavBar from "../components/NavBar";
 import Card from "../components/Card";
 import { movieContext } from "../context/Context";
 import { useNavigate } from "react-router-dom";
+import { getData } from "../js/fetch";
+import { optionsHeaders, urls } from "../js/tools";
+import Errors_data from "../components/Errors";
 
 function Series() {
   const [series, setSeries] = useState([]);
@@ -11,30 +14,7 @@ function Series() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getSeries = async () => {
-      const url =
-        "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1";
-      const options = {
-        method: "GET",
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMTg0YWYzYWZmMjRjZmJlMDRlMDE3OTNkYWNmN2E4MSIsIm5iZiI6MTcyNTMxODY5MS44ODI0NTQsInN1YiI6IjY2Nzc3ZjA4MmUyNGViMDI4OWFhNTAyOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Nga-9PotsNbiqsDF-LIUoCT36-sgBidR1W7MQSoctnw",
-          "Content-Type": "application/json",
-        },
-      };
-      try {
-        const response = await fetch(url, options);
-        if (!response.ok) {
-          throw new Error({ msg: `${response.statusText}` });
-        }
-        const data = await response.json();
-        return setSeries(data.results);
-      } catch (error) {
-        return setError(error);
-      }
-    };
-
-    getSeries();
+    getData(urls.urlSeries, optionsHeaders, setSeries, setError);
   }, []);
 
   const handleNavigateContext = (
@@ -51,18 +31,12 @@ function Series() {
     navigate(`/info`);
   };
 
-  if (error) {
-    return (
-      <div className="container-fluid text-center mt-5">
-        <h1 className="bg-danger p-3 rounded border">Error al cargar Series</h1>
-      </div>
-    );
-  }
+  if (error) return <Errors_data />;
 
   return (
     <>
       <NavBar />
-      <div className="container-fluid my-5 d-flex justify-content-evenly flex-wrap">
+      <div className="container my-5 d-flex justify-content-evenly flex-wrap">
         {series ? (
           series.map((serie) => (
             <Card
@@ -75,7 +49,7 @@ function Series() {
                 handleNavigateContext(
                   serie.id,
                   serie.original_language,
-                  serie.original_title,
+                  serie.original_name,
                   serie.overview,
                   serie.vote_count,
                   serie.backdrop_path,

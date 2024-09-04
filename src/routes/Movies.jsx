@@ -3,6 +3,9 @@ import Card from "../components/Card";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
 import { movieContext } from "../context/Context";
+import { getData } from "../js/fetch";
+import { optionsHeaders, urls } from "../js/tools";
+import Errors_data from "../components/Errors";
 
 function Movies() {
   const [movies, setMovies] = useState([]);
@@ -11,30 +14,7 @@ function Movies() {
   const { movieActions } = useContext(movieContext);
 
   useEffect(() => {
-    const getMovies = async () => {
-      const url =
-        "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc";
-      const options = {
-        method: "GET",
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMTg0YWYzYWZmMjRjZmJlMDRlMDE3OTNkYWNmN2E4MSIsIm5iZiI6MTcyNTMxODY5MS44ODI0NTQsInN1YiI6IjY2Nzc3ZjA4MmUyNGViMDI4OWFhNTAyOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Nga-9PotsNbiqsDF-LIUoCT36-sgBidR1W7MQSoctnw",
-          "Content-Type": "application/json",
-        },
-      };
-      try {
-        const response = await fetch(url, options);
-        if (!response.ok) {
-          throw new Error({ msg: `${response.statusText}` });
-        }
-
-        const data = await response.json();
-        return setMovies(data.results);
-      } catch (error) {
-        return setError(error);
-      }
-    };
-    getMovies();
+    getData(urls.urlMovies, optionsHeaders, setMovies, setError);
   }, []);
 
   const handleNavigateContext = (
@@ -51,13 +31,7 @@ function Movies() {
     navigate(`/info`);
   };
 
-  if (error) {
-    return (
-      <div className="container-fluid text-center mt-5">
-        <h1 className="bg-danger p-3 rounded border">Error al cargar Movies</h1>
-      </div>
-    );
-  }
+  if (error) return <Errors_data />;
 
   return (
     <>
@@ -67,7 +41,7 @@ function Movies() {
           movies.map((movie) => (
             <Card
               key={movie.id}
-              votes={parseFloat(movie.vote_average.toFixed(2))}
+              votes={Math.floor(movie.vote_average)}
               img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               title={movie.original_title}
               date={movie.release_date}

@@ -4,6 +4,7 @@ import Movies from "./Movies";
 import Series from "./Series";
 import Info from "./Info";
 import Peoples from "./Peoples";
+import Errors_data from "../components/Errors";
 
 function Home() {
   return (
@@ -14,6 +15,7 @@ function Home() {
         <Route path="/series" element={<Series />} />
         <Route path="/peoples" element={<Peoples />} />
         <Route path="/info" element={<Info />} />
+        <Route path="/*" element={<Errors_data />} />
       </Routes>
     </BrowserRouter>
   );

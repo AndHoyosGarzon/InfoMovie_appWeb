@@ -66,3 +66,39 @@
     margin-top: 3rem;
   }
 }
+
+/*style cards*/
+.content_card {
+  transition: 0.5s;
+  width: 18rem;
+  height: auto;
+  margin: 1rem;
+  box-shadow: 9px 11px 8px -3px rgba(184, 184, 184, 1);
+  box-sizing: border-box;
+}
+
+.content_card:hover {
+  box-shadow: 9px 10px 23px -8px rgb(10, 10, 10);
+  z-index: 5;
+  cursor: pointer;
+}
+
+.badge {
+  position: absolute;
+  background-color: #dc3945;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 2rem;
+  padding: 0.2rem;
+  margin: 0.5rem;
+  display: flex;
+}
+
+/*media querys cards*/
+@media (min-width: 350px) and (max-width: 778px) {
+  .content_card{
+    max-width: 10rem;
+    max-height: auto;
+    
+  }  
+}
