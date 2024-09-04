@@ -35,12 +35,21 @@ function NavBar() {
         >
           <ul className="navbar-nav fw-bold">
             <li className="nav-item me-5">
-              <a className="nav-link " aria-current="page" href="#">
-                Peliculas
+              <a
+                onClick={() => navigate("/movies")}
+                className="nav-link "
+                aria-current="page"
+                href="#"
+              >
+                Movies
               </a>
             </li>
             <li className="nav-item me-5">
-              <a className="nav-link" href="#">
+              <a
+                onClick={() => navigate("/series")}
+                className="nav-link"
+                href="#"
+              >
                 Series
               </a>
             </li>

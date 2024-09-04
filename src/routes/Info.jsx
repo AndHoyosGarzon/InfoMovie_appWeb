@@ -6,13 +6,13 @@ import { FaLanguage } from "react-icons/fa";
 import { movieContext } from "../context/Context";
 import { useContext } from "react";
 
-function InfoMovie() {
+function Info() {
   const navigate = useNavigate();
   const { movie, movieActions } = useContext(movieContext);
 
   const handleDeleteContext = () => {
     movieActions({ type: "remove" });
-    navigate("/");
+    navigate("/movies");
   };
 
   return (
@@ -51,7 +51,7 @@ function InfoMovie() {
                 onClick={() => handleDeleteContext()}
                 className="btn btn-sm fw-bold btn-primary"
               >
-                Go to Home
+                Go Back
               </button>
             </div>
           </div>
@@ -65,4 +65,4 @@ function InfoMovie() {
   );
 }
 
-export default InfoMovie;
+export default Info;
