@@ -49,7 +49,7 @@ function Landing() {
     const addMovie = { id, language, title, overview, vote, backdrop, poster };
     movieActions({ type: "add", payload: addMovie });
 
-    navigate(`/info-movie/${title}`);
+    navigate(`/info-movie`);
   };
 
   if (error) {
@@ -89,7 +89,7 @@ function Landing() {
           ))
         ) : (
           <div className="container text-center fw-bold">
-            <h1>Loading Movies...</h1>{" "}
+            <h1>Loading Movies...</h1>
           </div>
         )}
       </div>
