@@ -24,10 +24,8 @@ function Landing() {
     getData(urls.urlPopularActors, optionsHeaders, setActors, setErrorActors);
   }, []);
 
-  console.log(actors);
-
   return (
-    <div className="bg-light">
+    <>
       <nav className="navbar navbar-expand-lg bg-body-secondary">
         <div className="container-fluid">
           <a className="navbar-brand fw-bold" href="#">
@@ -56,7 +54,7 @@ function Landing() {
                   aria-current="page"
                   href="#"
                 >
-                  Login
+                  login
                 </a>
               </li>
               <li className="nav-item ">
@@ -73,7 +71,7 @@ function Landing() {
         </div>
       </nav>
       <div className="container-fluid my-5">
-        <h6 className="text-center">Trending Movies</h6>
+        <h6 className="text-center fw-bold text-secondary">Trending Movies</h6>
         <div className={style.content_section}>
           {movies &&
             movies.map((movie) => (
@@ -87,13 +85,16 @@ function Landing() {
           {errorMovies && <h1>{errorMovies}</h1>}
         </div>
         <div className="d-flex justify-content-center mt-2">
-          <button className="btn btn-sm fw-bold border btn-primary">
+          <button
+            onClick={() => navigate("/movies")}
+            className="btn btn-sm fw-bold border btn-dark"
+          >
             Go to movies
           </button>
         </div>
       </div>
       <div className="container-fluid my-5">
-        <h6 className="text-center">Trending Series</h6>
+        <h6 className="text-center fw-bold text-secondary">Trending Series</h6>
         <div className={style.content_section}>
           {series &&
             series.map((serie) => (
@@ -107,13 +108,16 @@ function Landing() {
           {errorSeries && <h1>{errorSeries}</h1>}
         </div>
         <div className="d-flex justify-content-center mt-2">
-          <button className="btn btn-sm fw-bold border btn-primary">
+          <button
+            onClick={() => navigate("/series")}
+            className="btn btn-sm fw-bold border btn-dark"
+          >
             Go to Series
           </button>
         </div>
       </div>
       <div className="container-fluid my-5">
-        <h6 className="text-center">Popular Actors</h6>
+        <h6 className="text-center fw-bold text-secondary">Popular Actors</h6>
         <div className={style.content_section}>
           {actors &&
             actors.map((actor) => (
@@ -127,12 +131,15 @@ function Landing() {
           {errorActors && <h1>{errorActors}</h1>}
         </div>
         <div className="d-flex justify-content-center mt-2">
-          <button className="btn btn-sm fw-bold border btn-primary">
+          <button
+            onClick={() => navigate("/peoples")}
+            className="btn btn-sm fw-bold border btn-dark"
+          >
             Go to Actors
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

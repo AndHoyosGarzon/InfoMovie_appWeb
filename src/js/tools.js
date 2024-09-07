@@ -8,7 +8,7 @@ export const urls = {
   urlSeries: "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
   urlPopularActors:
     "https://api.themoviedb.org/3/person/popular?language=en-US&page=1",
-  urlPeoples: "https://api.themoviedb.org/3/trending/person/day?language=en-US",
+  urlPeoples: "https://api.themoviedb.org/3/person/popular?language=en-US&page=5",
 };
 
 export const optionsHeaders = {
