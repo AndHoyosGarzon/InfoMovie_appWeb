@@ -73,7 +73,7 @@ function Landing() {
         </div>
       </nav>
       <div className="container-fluid my-5">
-        <h6>Trending Movies</h6>
+        <h6 className="text-center">Trending Movies</h6>
         <div className={style.content_section}>
           {movies &&
             movies.map((movie) => (
@@ -88,7 +88,7 @@ function Landing() {
         </div>
       </div>
       <div className="container-fluid my-5">
-        <h6>Trending Series</h6>
+        <h6 className="text-center">Trending Series</h6>
         <div className={style.content_section}>
           {series &&
             series.map((serie) => (
@@ -103,7 +103,7 @@ function Landing() {
         </div>
       </div>
       <div className="container-fluid my-5">
-        <h6 >Popular Actors</h6>
+        <h6>Popular Actors</h6>
         <div className={style.content_section}>
           {actors &&
             actors.map((actor) => (
