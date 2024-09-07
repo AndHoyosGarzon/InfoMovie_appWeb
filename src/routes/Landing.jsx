@@ -86,6 +86,11 @@ function Landing() {
             ))}
           {errorMovies && <h1>{errorMovies}</h1>}
         </div>
+        <div className="d-flex justify-content-center mt-2">
+          <button className="btn btn-sm fw-bold border btn-primary">
+            Go to movies
+          </button>
+        </div>
       </div>
       <div className="container-fluid my-5">
         <h6 className="text-center">Trending Series</h6>
@@ -101,9 +106,14 @@ function Landing() {
             ))}
           {errorSeries && <h1>{errorSeries}</h1>}
         </div>
+        <div className="d-flex justify-content-center mt-2">
+          <button className="btn btn-sm fw-bold border btn-primary">
+            Go to Series
+          </button>
+        </div>
       </div>
       <div className="container-fluid my-5">
-        <h6>Popular Actors</h6>
+        <h6 className="text-center">Popular Actors</h6>
         <div className={style.content_section}>
           {actors &&
             actors.map((actor) => (
@@ -115,6 +125,11 @@ function Landing() {
               />
             ))}
           {errorActors && <h1>{errorActors}</h1>}
+        </div>
+        <div className="d-flex justify-content-center mt-2">
+          <button className="btn btn-sm fw-bold border btn-primary">
+            Go to Actors
+          </button>
         </div>
       </div>
     </div>
