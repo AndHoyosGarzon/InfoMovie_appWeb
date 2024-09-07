@@ -4,7 +4,7 @@ import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
 import { movieContext } from "../context/Context";
 import { getData } from "../js/fetch";
-import { optionsHeaders, urls } from "../js/tools";
+import {  optionsHeaders, urls } from "../js/tools";
 import Errors_data from "../components/Errors";
 
 function Movies() {
@@ -29,14 +29,14 @@ function Movies() {
     const addMovie = { id, language, title, overview, vote, backdrop, poster };
     movieActions({ type: "add", payload: addMovie });
     navigate(`/info`);
-  };
+  }; 
 
   if (error) return <Errors_data />;
 
   return (
     <>
       <NavBar />
-      <div className="container-fluid my-5 d-flex justify-content-evenly flex-wrap">
+      <div className="container my-5 d-flex justify-content-evenly flex-wrap">
         {movies ? (
           movies.map((movie) => (
             <Card

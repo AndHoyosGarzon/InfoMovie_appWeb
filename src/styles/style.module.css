@@ -96,9 +96,144 @@
 
 /*media querys cards*/
 @media (min-width: 350px) and (max-width: 778px) {
-  .content_card{
+  .content_card {
     max-width: 10rem;
     max-height: auto;
-    
-  }  
+  }
+}
+
+/*styles forms*/
+.content_form {
+  width: auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(231, 229, 229, 0.4);
+}
+
+.desing_form {
+  transition: 0.3s;
+  width: 450px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ffffff;
+  border: 0.5px solid rgb(171, 169, 169);
+  border-radius: 10px;
+  box-shadow: 10px 10px 8px -2px rgba(196, 195, 195, 0.97);
+}
+
+.desing_form:hover {
+  box-shadow: 7px 6px 0px -3px rgba(92, 91, 92, 1);
+}
+
+.title_form {
+  width: 80%;
+  text-align: center;
+}
+
+.content_inputs {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+  box-sizing: border-box;
+}
+
+.desing_input {
+  width: 100%;
+  border: 0.5px solid rgb(171, 169, 169);
+  border-radius: 6px;
+  margin-top: 0.2rem;
+  padding: 0.5rem;
+}
+
+.desing_input:focus {
+  outline: none;
+}
+
+.btn {
+  width: auto;
+  border: none;
+  padding: 0.3rem 2rem;
+  background-color: rgb(68, 110, 236);
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.btn:hover {
+  background-color: rgba(68, 110, 236, 0.8);
+}
+
+.text_form {
+  width: 80%;
+  color: rgb(175, 173, 173);
+  font-weight: bold;
+  text-align: center;
+}
+
+/*media querys form*/
+@media (min-width: 350px) and (max-width: 778px) {
+  .desing_form {
+    max-width: 90%;
+    max-height: 100vh;
+  }
+}
+
+/*styles sections*/
+.content_section {
+  height: 300px;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-radius: 5px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.content_section::-webkit-scrollbar{
+  height: 0.1rem;
+  background-color: #fffcfc;
+}
+
+.content_section::-webkit-scrollbar-thumb{
+  background-color: #ababab;
+  
+}
+
+.content_section:hover{
+  overflow-y:hidden ;
+}
+
+/*styles cardSections*/
+.content_cardSection {
+  transition: 0.8s;
+  min-width: 205px;
+  height: 255px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  margin-right: 2rem;
+  margin-bottom: 3px; 
+}
+
+.img_cardSection{
+  width: auto;
+  height: 80%;
+  object-fit: cover;
+  border-radius: 5% 5% 0 0;
+}
+
+.content_cardSection:hover{
+  min-width: 215px;
+  height: 265px;
+  box-shadow: 15px 16px 5px -11px rgb(126, 125, 126);
 }

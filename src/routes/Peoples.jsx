@@ -37,7 +37,7 @@ function Peoples() {
   return (
     <>
       <NavBar />
-      <div className="container-fluid my-5 d-flex justify-content-evenly flex-wrap">
+      <div className="container my-5 d-flex justify-content-evenly flex-wrap">
         {peoples ? (
           peoples.map((people) => (
             <Card
