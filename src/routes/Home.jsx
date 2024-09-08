@@ -7,6 +7,7 @@ import Peoples from "./Peoples";
 import Errors_data from "../components/Errors";
 import Register from "./Register";
 import Login from "./Login";
+import InfoActors from "./InfoActors";
 
 function Home() {
   return (
@@ -18,8 +19,12 @@ function Home() {
         <Route path="/movies" element={<Movies />} />
         <Route path="/series" element={<Series />} />
         <Route path="/peoples" element={<Peoples />} />
-        <Route path="/info" element={<Info />} />
-        <Route path="/*" element={<Errors_data />} />
+        <Route
+          path="/info/:id/:language/:title/:overview/:vote/:backdrop/:poster"
+          element={<Info />}
+        />
+        <Route path="/info_actors/:id" element={<InfoActors />} />
+        {/*  <Route path="/*" element={<Errors_data />} /> */}
       </Routes>
     </BrowserRouter>
   );

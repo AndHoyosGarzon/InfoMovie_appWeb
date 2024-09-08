@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import Card from "../components/Card";
-import { movieContext } from "../context/Context";
 import { useNavigate } from "react-router-dom";
 import { getData } from "../js/fetch";
 import { optionsHeaders, urls } from "../js/tools";
@@ -10,7 +9,7 @@ import Errors_data from "../components/Errors";
 function Series() {
   const [series, setSeries] = useState([]);
   const [error, setError] = useState("");
-  const { movieActions } = useContext(movieContext);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,13 +25,14 @@ function Series() {
     backdrop,
     poster
   ) => {
-    const addMovie = { id, language, title, overview, vote, backdrop, poster };
-    movieActions({ type: "add", payload: addMovie });
-    navigate(`/info`);
+    navigate(
+      `/info/${id}/${language}/${title}/${overview}/${vote}${backdrop}${poster}`
+    );
   };
 
   if (error) return <Errors_data />;
 
+  
   return (
     <>
       <NavBar />

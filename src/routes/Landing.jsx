@@ -24,6 +24,8 @@ function Landing() {
     getData(urls.urlPopularActors, optionsHeaders, setActors, setErrorActors);
   }, []);
 
+  console.log(actors)
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-secondary">
