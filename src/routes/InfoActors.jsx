@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getActors } from "../js/fetch";
 import { optionsHeaders } from "../js/tools";
+import style from "../styles/style.module.css";
 import NavBar from "../components/NavBar";
+import Errors from "../components/Errors";
 
 function InfoActors() {
   const [actor, setActor] = useState([]);
@@ -17,16 +19,18 @@ function InfoActors() {
     }
   }, [id]);
 
-  console.log(actor);
+  
   return (
     <>
       <NavBar />
-      <div >
-        <h1>{actor.name}</h1>
+      <div className={style.content_actors}>
+        
         <img
+          className={style.image_actors}
           src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
           alt={actor.name}
         />
+        <h1>{actor.name}</h1>
         <p>{actor.biography}</p>
         <p>{actor.place_of_birth}</p>
         <p>{actor.birthday}</p>

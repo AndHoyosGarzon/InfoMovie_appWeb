@@ -1,3 +1,14 @@
+/*styles info actors*/
+.content_actors{
+  display: flex;
+}
+
+.image_actors{
+  width: 500px;
+  height: 500px;
+}
+
+/*styles info movies and series*/
 .container_info {
   background-color: rgba(0, 0, 0, 0.85);
   width: 100%;
@@ -38,7 +49,7 @@
   justify-content: space-around;
 }
 
-/*media queries infoMovie*/
+/*media queries info movies and series*/
 
 @media (min-width: 400px) and (max-width: 768px) {
   .container_info {

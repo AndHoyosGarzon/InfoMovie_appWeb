@@ -8,7 +8,8 @@ export const urls = {
   urlSeries: "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
   urlPopularActors:
     "https://api.themoviedb.org/3/person/popular?language=en-US&page=1",
-  urlPeoples: "https://api.themoviedb.org/3/person/popular?language=en-US&page=5",
+  urlPeoples:
+    "https://api.themoviedb.org/3/person/popular?language=en-US&page=5",
 };
 
 export const optionsHeaders = {
@@ -19,3 +20,12 @@ export const optionsHeaders = {
     "Content-Type": "application/json",
   },
 };
+
+export const endpoints = {
+  register:
+    "https://apirest-auth-users-appinfomovies.onrender.com/api/register",
+  login: "https://apirest-auth-users-appinfomovies.onrender.com/api/login",
+  updateUser: "https://apirest-auth-users-appinfomovies.onrender.com/api/:id",
+  deleteUser: "https://apirest-auth-users-appinfomovies.onrender.com/api/:id",
+};
+

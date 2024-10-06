@@ -1,8 +1,62 @@
+import { useEffect, useState } from "react";
 import style from "../styles/style.module.css";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function FormLogin() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [data, setData] = useState([]);
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+
+  const loginUser = async () => {
+    try {
+      const url =
+        "https://apirest-auth-users-appinfomovies.onrender.com/api/login";
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      };
+      const response = await fetch(url, options);
+
+      if (!response.ok) {
+        setError(response.statusText);
+        toast.error(error);
+      }
+
+      const data = await response.json();
+      return setData(data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      toast.error("Please complete all fields");
+    }
+
+    if (email && password) {
+      loginUser();
+      toast.success("Welcome");
+      setEmail("");
+      setPassword("");
+    }
+
+    setTimeout(() => {
+      navigate("/");
+    }, 3000);
+  };
+
+  sessionStorage.setItem("token", JSON.stringify(data.accessToken));
+
   return (
     <div className={style.content_form}>
       <form className={style.desing_form}>
@@ -27,6 +81,8 @@ function FormLogin() {
             type="email"
             id="email"
             placeholder="user@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
@@ -39,10 +95,18 @@ function FormLogin() {
             type="password"
             id="password"
             placeholder="User78952."
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
-        <button className={style.btn}>Login</button>
+        <button
+          type="submit"
+          onClick={(e) => handleSubmit(e)}
+          className={style.btn}
+        >
+          Login
+        </button>
         <div className={style.text_form}>
           <p>Please enter your email and password to access your account</p>
         </div>
@@ -50,6 +114,7 @@ function FormLogin() {
       <a className="mt-3 fw-bold text-secondary" href="/">
         Go Back
       </a>
+      <ToastContainer />
     </div>
   );
 }

@@ -27,3 +27,4 @@ export const getActors = async (url, options, setActors, setError) => {
     return setError(error);
   }
 };
+
