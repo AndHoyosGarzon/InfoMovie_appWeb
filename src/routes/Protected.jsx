@@ -1,10 +1,15 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 function Protected() {
-  const isLoggedIn = sessionStorage.getItem("token");
-
-  if (!isLoggedIn) {
-    return <Navigate to={"/register"} />;
+  const isLoggedIn = JSON.parse(sessionStorage.getItem("user"));
+  if (
+    !isLoggedIn.username ||
+    !isLoggedIn.fullname ||
+    !isLoggedIn.email ||
+    !isLoggedIn.accessToken ||
+    !isLoggedIn._id
+  ) {
+    return <Navigate to={"/login"} />;
   } else {
     return <Outlet />;
   }

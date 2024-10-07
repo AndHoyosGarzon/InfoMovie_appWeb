@@ -24,7 +24,7 @@ function Landing() {
     getData(urls.urlPopularActors, optionsHeaders, setActors, setErrorActors);
   }, []);
 
-  console.log(actors)
+
 
   return (
     <>

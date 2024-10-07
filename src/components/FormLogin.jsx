@@ -2,7 +2,14 @@ import { useEffect, useState } from "react";
 import style from "../styles/style.module.css";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { ToastContainer, toast } from "react-toastify";
+import {
+  Bounce,
+  Flip,
+  Slide,
+  ToastContainer,
+  Zoom,
+  toast,
+} from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 function FormLogin() {
@@ -26,36 +33,56 @@ function FormLogin() {
       const response = await fetch(url, options);
 
       if (!response.ok) {
-        setError(response.statusText);
-        toast.error(error);
+        toast.error("Error in login user", {
+          position: "top-center",
+          theme: "dark",
+          transition: Flip,
+          autoClose: 2000,
+        });
+        throw new Error(response.ok);
       }
 
+      toast.info("Login successfully", {
+        position: "top-center",
+        theme: "dark",
+        transition: Flip,
+        autoClose: 2000,
+      });
+
       const data = await response.json();
+
+      sessionStorage.setItem("user", JSON.stringify(data));
+
       return setData(data);
     } catch (error) {
-      setError(error.message);
+      //    console.log("el error es", error.message);
+      setError(error);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) {
-      toast.error("Please complete all fields");
+      toast.warning("Please complete all fields", {
+        position: "top-center",
+        theme: "dark",
+        autoClose: 2000,
+        transition: Flip,
+      });
     }
-
     if (email && password) {
       loginUser();
-      toast.success("Welcome");
       setEmail("");
       setPassword("");
     }
-
-    setTimeout(() => {
-      navigate("/");
-    }, 3000);
   };
 
-  sessionStorage.setItem("token", JSON.stringify(data.accessToken));
+  setTimeout(() => {
+    if (data.length < 1) {
+      return;
+    }
+    navigate("/");
+  }, 3000);
 
   return (
     <div className={style.content_form}>
