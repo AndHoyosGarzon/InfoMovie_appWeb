@@ -15,8 +15,8 @@ function Home() {
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route   element={<Protected />}>
-          <Route path="/" element={<Landing />} />
+        <Route path="/" element={<Landing />} />
+        <Route element={<Protected />}>
           <Route path="/movies" element={<Movies />} />
           <Route path="/series" element={<Series />} />
           <Route path="/peoples" element={<Peoples />} />

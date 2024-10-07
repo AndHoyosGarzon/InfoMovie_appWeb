@@ -9,7 +9,7 @@ function Protected() {
     !isLoggedIn.accessToken ||
     !isLoggedIn._id
   ) {
-    return <Navigate to={"/login"} />;
+    return <Navigate to={"/"} />;
   } else {
     return <Outlet />;
   }

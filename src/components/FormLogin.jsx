@@ -1,15 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import style from "../styles/style.module.css";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import {
-  Bounce,
-  Flip,
-  Slide,
-  ToastContainer,
-  Zoom,
-  toast,
-} from "react-toastify";
+import { Flip, ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 function FormLogin() {

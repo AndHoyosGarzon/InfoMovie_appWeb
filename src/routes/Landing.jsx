@@ -24,7 +24,15 @@ function Landing() {
     getData(urls.urlPopularActors, optionsHeaders, setActors, setErrorActors);
   }, []);
 
-
+  const handleNavigate = (route) => {
+    const data = JSON.parse(sessionStorage.getItem("user"));
+    if (!data) {
+      
+      navigate("/login");
+    } else {
+      navigate(`/${route}`);
+    }
+  };
 
   return (
     <>
@@ -88,7 +96,7 @@ function Landing() {
         </div>
         <div className="d-flex justify-content-center mt-2">
           <button
-            onClick={() => navigate("/movies")}
+            onClick={() => handleNavigate("movies")}
             className="btn btn-sm fw-bold border btn-dark"
           >
             Go to movies
@@ -111,7 +119,7 @@ function Landing() {
         </div>
         <div className="d-flex justify-content-center mt-2">
           <button
-            onClick={() => navigate("/series")}
+            onClick={() => handleNavigate("series")}
             className="btn btn-sm fw-bold border btn-dark"
           >
             Go to Series
@@ -134,7 +142,7 @@ function Landing() {
         </div>
         <div className="d-flex justify-content-center mt-2">
           <button
-            onClick={() => navigate("/peoples")}
+            onClick={() => handleNavigate("peoples")}
             className="btn btn-sm fw-bold border btn-dark"
           >
             Go to Actors
