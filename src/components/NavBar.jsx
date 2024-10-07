@@ -12,6 +12,15 @@ function NavBar() {
     navigate("/");
   };
 
+  const handleLogout = () => {
+    const data = JSON.parse(sessionStorage.getItem("user"));
+
+    if (data) {
+      sessionStorage.removeItem("user");
+      navigate("/");
+    }
+  };
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -63,8 +72,8 @@ function NavBar() {
               </a>
             </li>
             <li className="nav-item me-3">
-              <a className="nav-link " href="#">
-                Mas
+              <a onClick={() => handleLogout()} className="nav-link " href="#">
+                Logout
               </a>
             </li>
           </ul>
