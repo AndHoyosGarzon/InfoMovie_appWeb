@@ -8,6 +8,7 @@ import Register from "./Register";
 import Login from "./Login";
 import InfoActors from "./InfoActors";
 import Protected from "./Protected";
+import Video from "../components/Video";
 
 function Home() {
   return (
@@ -25,6 +26,7 @@ function Home() {
             element={<Info />}
           />
           <Route path="/info_actors/:id" element={<InfoActors />} />
+          <Route path="/trailer/:id" element={<Video />}/>
         </Route>
       </Routes>
     </BrowserRouter>

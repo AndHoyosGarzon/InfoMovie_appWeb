@@ -1,9 +1,9 @@
 /*styles info actors*/
-.content_actors{
+.content_actors {
   display: flex;
 }
 
-.image_actors{
+.image_actors {
   width: 500px;
   height: 500px;
 }
@@ -45,8 +45,7 @@
 .content_data {
   color: #ffffff;
   margin: auto 0%;
-  display: flex;
-  justify-content: space-around;
+  
 }
 
 /*media queries info movies and series*/
